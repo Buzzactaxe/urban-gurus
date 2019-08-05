@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const passport = require('passport');
 //JS uses index by default, no need to add controller/index
 const {
-  postRegister
+  postRegister,
+  postLogin,
+  getLogout
 } = require('../controllers');
 const {
   errorHandler
@@ -30,16 +31,10 @@ router.get('/login', (req, res, next) => {
 });
 
 /* POST /login*/
-router.post('/login', passport.authenticate('local', {
-  successRedirect: '/',
-  failureRedirect: '/login'
-}));
+router.post('/login', postLogin);
 
 /* GET /logout*/
-router.get('/logout', (req, res, next) => {
-  req.logout();
-  res.redirect('/');
-});
+router.get('/logout', getLogout);
 
 /* GET /profile*/
 router.get('/profile', (req, res, next) => {
