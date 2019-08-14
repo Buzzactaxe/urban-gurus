@@ -13,7 +13,13 @@ const PostSchema = new Schema({
 	author      : {
 		type : Schema.Types.ObjectId,
 		ref  : 'User'
-	}
+	},
+	review      : [
+		{
+			type : Schema.Types.ObjectId,
+			ref  : 'Review'
+		}
+	]
 });
 
 module.exports = mongoose.model('Post', PostSchema);

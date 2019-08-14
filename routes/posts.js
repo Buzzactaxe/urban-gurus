@@ -19,8 +19,10 @@ router.get('/:id', asyncErrorHandler(postShow));
 
 /* GET post edit /post/:id/edit  */
 router.get('/:id/edit', asyncErrorHandler(postEdit));
+
 /* PUT post Update /post/:id */
 router.put('/:id', asyncErrorHandler(postUpdate));
+
 /* DELETE post Destroy /post/:id */
 router.delete('/:id', asyncErrorHandler(postDestroy));
 
