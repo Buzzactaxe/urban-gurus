@@ -1,6 +1,7 @@
 require('dotenv').config();
 const createError = require('http-errors');
 const express = require('express');
+const engine = require('ejs-mate');
 const path = require('path');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
@@ -30,6 +31,8 @@ db.once('open', () => {
 	console.log("we're connected!");
 });
 
+// use ejs-locals for all ejs templates:
+app.engine('ejs', engine);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -65,6 +68,12 @@ passport.use(User.createStrategy());
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+// title middleware
+app.use(function(req, res, next) {
+	res.locals.title = 'Urban Gurus';
+	next();
+});
 
 // ROUTES
 app.use('/', indexRouter);
