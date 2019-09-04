@@ -20,7 +20,7 @@ const reviewsRouter = require('./routes/reviews');
 const app = express();
 
 //Connect to Database
-mongoose.connect('mongodb://localhost:27017/urban-gurus-mapbox', {
+mongoose.connect('mongodb://localhost:27017/urban-gurus', {
 	useCreateIndex  : true,
 	useNewUrlParser : true
 });
@@ -55,10 +55,7 @@ app.use(
 	session({
 		secret            : 'stay frosty',
 		resave            : false,
-		saveUninitialized : true,
-		cookie            : {
-			secure : true
-		}
+		saveUninitialized : true
 	})
 );
 app.use(passport.initialize());
@@ -70,6 +67,11 @@ passport.deserializeUser(User.deserializeUser());
 
 // set local variables middleware
 app.use(function(req, res, next) {
+	req.user = {
+		_id      : '5d6caaeee434142ca4ffdfeb',
+		username : 'valliant'
+	};
+	res.locals.currentUser = req.user;
 	res.locals.title = 'Urban Gurus';
 	// set success flash message
 	res.locals.success = req.session.success || '';

@@ -4,13 +4,11 @@ const passportLocalMongoose = require('passport-local-mongoose');
 
 const ReviewSchema = new Schema({
 	body   : String,
-	author : String,
-	review : [
-		{
-			type : Schema.Types.ObjectId,
-			ref  : 'User'
-		}
-	]
+	rating : Number,
+	author : {
+		type : Schema.Types.ObjectId,
+		ref  : 'User'
+	}
 });
 
 module.exports = mongoose.model('Review', ReviewSchema);

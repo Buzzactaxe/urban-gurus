@@ -19,3 +19,11 @@ new mapboxgl.Marker(el)
 			.setHTML('<h3>' + post.title + '</h3><p>' + post.location + '</p>')
 	)
 	.addTo(map);
+
+//Toggle edit Review form
+$('.toggle-edit-form').on('click', function() {
+	//toggle edit button text on click
+	$(this).text() === 'Edit' ? $(this).text('Cancel') : $(this).text('Edit');
+	//toggle vsibility of edit form
+	$(this).siblings('.edit-review-form').toggle();
+});
