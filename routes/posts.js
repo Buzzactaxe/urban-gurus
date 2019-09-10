@@ -14,7 +14,7 @@ router.get('/new', postNew);
 /* POST posts create /posts */
 router.post('/', upload.array('images', 4), asyncErrorHandler(postCreate));
 
-/* GET post SHOW /post/:id */
+/* GET post show /post/:id */
 router.get('/:id', asyncErrorHandler(postShow));
 
 /* GET post edit /post/:id/edit  */
