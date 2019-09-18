@@ -1,15 +1,11 @@
 const express = require('express');
 const router = express.Router();
 //JS uses index by default, no need to add controller/index
-const { postRegister, postLogin, getLogout } = require('../controllers');
+const { landingPage, postRegister, postLogin, getLogout } = require('../controllers');
 const { asyncErrorHandler } = require('../middleware');
 
 /* GET Home page */
-router.get('/', (req, res, next) => {
-	res.render('index', {
-		title : 'Urban Gurus - Home'
-	});
-});
+router.get('/', asyncErrorHandler(landingPage));
 
 /* GET /register */
 router.get('/register', (req, res, next) => {
