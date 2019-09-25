@@ -1,4 +1,5 @@
 const Review = require('../models/review');
+const User = require('../models/user');
 
 module.exports = {
 	asyncErrorHandler : (fn) => (req, res, next) => {
@@ -11,5 +12,11 @@ module.exports = {
 		}
 		req.session.error = 'Bye Bye';
 		return res.redirect('/');
+	},
+	isLoggedIn        : (req, res, next) => {
+		if (req.isAuthenticated()) return next();
+		req.session.error = 'You need to be logged in to do that!';
+		req.session.redirectTo = req.originalUrl;
+		res.redirect('/login');
 	}
 };

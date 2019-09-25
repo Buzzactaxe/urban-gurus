@@ -1,27 +1,23 @@
 const express = require('express');
 const router = express.Router();
 //JS uses index by default, no need to add controller/index
-const { landingPage, postRegister, postLogin, getLogout } = require('../controllers');
+const { landingPage, getRegister, postRegister, getLogin, postLogin, getLogout } = require('../controllers');
 const { asyncErrorHandler } = require('../middleware');
 
 /* GET Home page */
 router.get('/', asyncErrorHandler(landingPage));
 
 /* GET /register */
-router.get('/register', (req, res, next) => {
-	res.send('GET /register');
-});
+router.get('/register', getRegister);
 
 /* POST /resgister */
 router.post('/register', asyncErrorHandler(postRegister));
 
 /* GET /login*/
-router.get('/login', (req, res, next) => {
-	res.send('GET /login');
-});
+router.get('/login', getLogin);
 
 /* POST /login*/
-router.post('/login', postLogin);
+router.post('/login', asyncErrorHandler(postLogin));
 
 /* GET /logout*/
 router.get('/logout', getLogout);
