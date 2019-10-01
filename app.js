@@ -3,6 +3,7 @@ const createError = require('http-errors');
 const express = require('express');
 const engine = require('ejs-mate');
 const path = require('path');
+const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
@@ -41,6 +42,7 @@ app.set('view engine', 'ejs');
 // set public asset directory
 app.use(express.static('public'));
 
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(
@@ -104,7 +106,7 @@ app.use(function(err, req, res, next) {
 	// // render the error page
 	// res.status(err.status || 500);
 	// res.render('error');
-	console.log(err);
+	// console.log(err);
 	req.session.error = err.message;
 	res.redirect('back');
 });
