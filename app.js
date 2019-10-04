@@ -6,7 +6,6 @@ const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
 const passport = require('passport');
 const User = require('./models/user');
 const session = require('express-session');
@@ -24,8 +23,9 @@ const app = express();
 
 //Connect to Database
 mongoose.connect('mongodb://localhost:27017/urban-gurus', {
-	useCreateIndex  : true,
-	useNewUrlParser : true
+	useCreateIndex     : true,
+	useUnifiedTopology : true,
+	useNewUrlParser    : true
 });
 
 const db = mongoose.connection;
@@ -44,9 +44,9 @@ app.use(express.static('public'));
 
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(
-	bodyParser.urlencoded({
+	express.urlencoded({
 		extended : true
 	})
 );

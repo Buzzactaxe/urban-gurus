@@ -121,7 +121,7 @@ module.exports = {
 			20
 		)}...</p>`;
 		// save the updated post into the db
-		post.save();
+		await post.save();
 		// redirect to show page
 		res.redirect(`/posts/${post.id}`);
 	},
