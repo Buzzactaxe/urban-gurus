@@ -53,9 +53,14 @@ module.exports = {
 			res.redirect(redirectUrl);
 		});
 	},
-	//GET /logout authenticate method
+	// GET /logout
 	getLogout(req, res, next) {
 		req.logout();
 		res.redirect('/');
+	},
+	// GET /profile
+	async getProfile(req, res, next) {
+		const posts = await Post.find().where('author').equals(req.user._id).limit(10).exec();
+		res.render('profile', { posts });
 	}
 };
