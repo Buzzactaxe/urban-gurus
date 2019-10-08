@@ -2,6 +2,8 @@ const User = require('../models/user');
 const Post = require('../models/post');
 const passport = require('passport');
 const mapBoxToken = process.env.MAPBOX_TOKEN;
+const util = require('util');
+
 module.exports = {
 	// GET home/landing page
 	async landingPage(req, res, next) {
@@ -62,5 +64,23 @@ module.exports = {
 	async getProfile(req, res, next) {
 		const posts = await Post.find().where('author').equals(req.user._id).limit(10).exec();
 		res.render('profile', { posts });
+	},
+	async updateProfile(req, res, next) {
+		// destructure username and email from req.body
+		const { username, email } = req.body;
+		// destructure user object from res.locals
+		const { user } = res.locals;
+		// check if username or email need to be updated
+		if (username) user.username = username;
+		if (email) user.email = email;
+		// save and update user to database
+		await user.save();
+		// promisify req.login
+		const login = util.promisify(req.login.bind(req));
+		// log the user back in with new info
+		await login(user);
+		// redirect to /profile with a success flash message
+		req.session.success = 'Profile successfully updated!';
+		res.redirect('/profile');
 	}
 };
