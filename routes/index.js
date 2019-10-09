@@ -1,5 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
+const { storage } = require('../cloudinary');
+const upload = multer({ storage });
 //JS uses index by default, no need to add controller/index
 const {
 	landingPage,
@@ -21,7 +24,7 @@ router.get('/', asyncErrorHandler(landingPage));
 router.get('/register', getRegister);
 
 /* POST /resgister */
-router.post('/register', asyncErrorHandler(postRegister));
+router.post('/register', upload.single('image'), asyncErrorHandler(postRegister));
 
 /* GET /login*/
 router.get('/login', getLogin);
@@ -39,6 +42,7 @@ router.get('/profile', isLoggedIn, asyncErrorHandler(getProfile));
 router.put(
 	'/profile',
 	isLoggedIn,
+	upload.single('image'),
 	asyncErrorHandler(isValidPassword),
 	asyncErrorHandler(changePassword),
 	asyncErrorHandler(updateProfile)
