@@ -1,6 +1,15 @@
 <% layout('layouts/boilerplate') -%>
 <h1>POST INDEX!</h1>
-<div id="map"></div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-4">
+            <% include ../partials/searchFilter %>
+        </div>
+        <div class="col-8">
+            <div id="map"></div>
+        </div>
+    </div>
+</div>
 
 <% include ../partials/paginationPartial %>
 
@@ -10,7 +19,6 @@
         <div>Price: <%= post.price %></div>
         <div><%= post.description %></div>
         <div><%= post.location %></div>
-        
     </div>
     <div>
         <a href="/posts/<%= post.id %>"> View More</a>
