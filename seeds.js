@@ -19,7 +19,12 @@ async function seedPosts() {
 			},
 			price       : random1000,
 			avgRating   : random5,
-			author      : '5d8c4c51c6b4eb0518c8956f'
+			author      : '5d8c4c51c6b4eb0518c8956f',
+			images      : [
+				{
+					url : 'https://res.cloudinary.com/dmxvla004/image/upload/v1572868266/mark-unsplash_naejjq.jpg'
+				}
+			]
 		};
 		let post = new Post(postData);
 		post.properties.description = `<strong><a href="/posts/${post._id}">${title}</a></strong><p>${post.location}</p><p>${description.substring(

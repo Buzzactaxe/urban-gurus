@@ -1,19 +1,30 @@
-<% layout('layouts/boilerplate') -%>
+<% layout('layouts/boilerplate2') -%>
 
-<form action="/login" method="POST">
+<h1 class="title">Login</h1>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<form class="row" action="/login" method="POST">
+					<div class="form-group col-md-6">
+						<label for="username">User name</label>
+						<input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
+					</div>
+					<div class="form-group col-md-6">
+						<label for="password">Password</label>
+						<input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+					</div>					
+					<div class="form-group col-md-12">
+						<div class="checkbox checkbox-success">
+							<input id="checkbox1" type="checkbox">
+							<label for="checkbox1"> Remember me </label>
+						</div>
+					</div>
 
-	<div>
-		<label for="username">Username:</label>
-		<input type="text" id="username" name="username" placeholder="username" required>
+					<div class="col-md-12">
+						<button type="submit" class="btn btn btn-outline-success m-r-10">Submit</button>
+						<a href="/" id="cancel" name="cancel" class="btn btn-inverse waves-effect waves-light">Cancel</a>
+					</div>
+				</form>
+			</div>
+		</div>
 	</div>
-	<div>
-		<label for="password">Password:</label>
-		<input type="password" id="password" name="password" placeholder="password" required>
-	</div>
-	
-	<div>
-		<a href="/forgot-password">Forgot password?</a>
-	</div>
-	
-	<input type="submit">
-</form>

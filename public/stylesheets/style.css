@@ -1,10 +1,9 @@
-body {
-	padding: 50px;
-	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+.logo {
+	color: #fff;
 }
 
-a {
-	color: #00b7ff;
+.logo:hover {
+	color: #fff;
 }
 
 #map {
@@ -25,4 +24,13 @@ a {
 .profile-image {
 	width: 100px;
 	border-radius: 50%;
+}
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
 }

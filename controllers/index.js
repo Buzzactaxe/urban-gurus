@@ -13,9 +13,10 @@ module.exports = {
 	// GET home/landing page
 	async landingPage(req, res, next) {
 		// find all posts to populate into map
-		const posts = await Post.find({});
+		const posts = await Post.find({}).sort('-_id').exec();
+		const recentPosts = posts.slice(0, 3);
 		// render home page and pass in posts
-		res.render('index', { posts, mapBoxToken, title: 'Urban Gurus - Home' });
+		res.render('index', { posts, mapBoxToken, recentPosts, title: 'Urban Gurus - Home' });
 	},
 	// GET /register
 	getRegister(req, res, next) {
