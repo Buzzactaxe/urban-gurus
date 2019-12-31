@@ -1,46 +1,115 @@
-<% layout('layouts/boilerplate') -%>
+<% layout('layouts/logplate') -%>
 
-<h1><img src="<%= currentUser.image.secure_url %>" alt="<%= currentUser.username %>'s profile image" class="profile-image"> <%= currentUser.username %>'s Profile</h1
+<div class="banner spacer" style="background-image:url(/images/plain-background.jpg)">
+	<div class="container">
+		<div class="col-lg-4 text-center m-b-30">
+			<img src="<%= currentUser.image.secure_url  %>" class="img-circle" width="290">
+		</div>
+		<div class="col-lg-4 text-center m-b-30">
+			<h1 class="title" alt="<%= currentUser.username %>'s "></h1>
+		</div>
 
-<p>Recent posts:</p>
+		<div>
+			<h2 class="title font-bold">Update Info:</h2>
+		</div>
 
-<% posts.forEach(function(post) { %>
-    <div>
-        <a href="/posts/<%= post.id %>"><%= post.title %></a>
-    </div>
-<% }); %>
+		<form action="/profile?_method=PUT" method="POST" enctype="multipart/form-data">
+			<div class="col-md-7">
+				<div class="row">
+					<div class="form-group col-md-4">
+						<label for="username">Username:</label>
+					</div>
+					<div class="col-md-5">
+						<input class="form-control" type="text" id="username" name="username" placeholder="username" value="<%= currentUser.username %>" autofocus required>
+					</div>
+				</div>	
+			</div>
 
-<p>Update Info:</p>
+			<div class="col-md-7">
+				<div class="row">
+					<div class="form-group col-md-4">
+						<label for="current-password">Current Password <small>(required for update):</small></label>
+					</div>
+					<div class="col-md-5">
+						<input class="form-control" type="password" id="current-password" name="currentPassword" placeholder="current password" required>
+					</div>
+				</div>
+			</div>
 
-<form action="/profile?_method=PUT" method="POST" enctype="multipart/form-data">
-	<div>
-		<label for="username">Username:</label>
-		<input type="text" id="username" name="username" placeholder="username" value="<%= currentUser.username %>" autofocus required>
-	</div>
-	<div>
-		<label for="current-password">Current Password (required to update profile):</label>
-		<input type="password" id="current-password" name="currentPassword" placeholder="current password" required>
-	</div>
-	<div>
-		<label for="new-password">New Password:</label>
-		<input type="password" id="new-password" name="newPassword" placeholder="new password">
-	</div>
-	<div>
-		<label for="password-confirmation">New Password Confirmation:</label>
-		<input type="password" id="password-confirmation" name="passwordConfirmation" placeholder="password confirmation">
-	</div>
-	<div id="validation-message"></div>
-	<div>
-		<label for="email">Email:</label>
-		<input type="email" id="email" name="email" placeholder="email" value="<%= currentUser.email %>" required>
-	</div>
-	<div>
-		<label for="image">Image:</label>
-		<small>(this deletes existing)</small>
-		<input type="file" id="image" name="image">
-	</div>
+			<div class="col-md-7">
+				<div class="row">
+					<div class="form-group col-md-4">
+						<label for="new-password">New Password:</label>
+					</div>
+					<div class="col-md-5">
+						<input class="form-control" type="password" id="new-password" name="newPassword" placeholder="new password">
+					</div>
+				</div>
+			</div>
 
-	<input type="submit" id="update-profile">
-</form>
+			<div class="col-md-7">
+				<div class="row">
+					<div class="form-group col-md-4">
+						<label for="password-confirmation">New Password Confirmation:</label>
+					</div>
+					<div class="col-md-5">
+						<input class="form-control" type="password" id="password-confirmation" name="passwordConfirmation" placeholder="password confirmation">						
+					</div>
+			    </div>
+			</div>
+
+			<div class="col-md-7">
+				<div class="row">
+					<div class="form-group col-md-4">
+						<label for="email">Email:</label>
+					</div>
+					<div class="col-md-6">
+						<input class="form-control" type="email" id="email" name="email" placeholder="email" value="<%= currentUser.email %>" required>			
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-7">
+				<div class="row">
+					<div class="form-group col-md-4">
+						<label for="image">Image:<small> (this deletes existing)</small></label>
+						
+					</div> 
+					<div class="col-md-5">
+						<label for="image" class="btn m-t-10 btn btn-outline-success waves-ligh font-14">Image:</label>
+						<input type="file" class="inputfile" id="image" name="image">
+							
+					</div>
+				</div>
+			</div>
+
+			<div class="m-b-20 m-t-20">
+				<input class="btn waves-effect waves-light btn-rounded btn-secondary m-b-25 m-t-25" type="submit" id="update-profile">
+			</div>			
+		</form>
+
+
+		<div class="m-b-30 m-t-30">
+			<div>
+				<div class="form-group">
+					<h3 class="title"> <%= currentUser.username %>'s Recent Posts:</h3>
+				</div>
+				<% posts.forEach(function(post) { %> 
+					<div>
+						<a class="btn waves-effect waves-light btn-outline-warning m-b-20 m-t-20 font-14" href="/posts/<%= post.id %>"><%= post.title %></a>
+					</div>
+				<% }); %>			
+			</div>
+		</div>
+
+
+	
+	
+		
+
+
+		
+</div>
+
 
 <script src="/javascripts/profile.js"></script>
