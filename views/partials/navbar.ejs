@@ -11,23 +11,22 @@
              <a class="nav-link" href="/">
                Home
              </a>
-           </li>
+           </li>          
            <li class="nav-item"> 
              <a class="nav-link" href="/posts">
                Posts
              </a>
            </li>
            <% if(!currentUser) { %>
-           <li class="nav-item"> 
-             <a class="nav-link" href="/register">
-               Register
-             </a>
-           </li>
-           <li class="nav-item"> 
-             <a class="nav-link" href="/login">
-               Login
-             </a>
-           </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="h1-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Register / Login <i class="fa fa-angle-down m-l-5"></i>
+              </a>
+              <ul class="b-none dropdown-menu  animated fadeInUp">
+                <li><a class="dropdown-item" href="/register">Register</a></li>
+                <li><a class="dropdown-item" href="/login">Login</a></li>  
+              </ul>
+            </li>
            <% } else { %>
            <li class="nav-item"> 
              <a class="nav-link" href="/posts/new">
@@ -56,5 +55,7 @@
    </div>
  </div>
 </div>
+
+
 
 
